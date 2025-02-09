@@ -1,0 +1,30 @@
+body {
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.todo-item {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.todo-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.completed {
+  background-color: #f2f2f2;
+}
+
+.completed h6,
+.completed p {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.completed button {
+  text-decoration: solid !important;
+}

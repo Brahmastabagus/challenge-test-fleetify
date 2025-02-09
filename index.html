@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Brahmasta Bagus A">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+  </style>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+    </style>
+  <link rel="stylesheet" href="styles.css">
+  <title>Challenge Test | Fleetify</title>
+</head>
+
+<body>
+  <div
+    class="@container flex flex-col gap-3 items-center pt-10 bg-blue-300 dark:bg-gray-900 dark:text-white min-h-screen">
+    <button id="dark-mode-toggle"
+      class="fixed top-3 right-3 inline-flex items-center justify-center p-1 rounded-full transition-colors duration-200 dark:hover:bg-gray-500 hover:bg-gray-200 cursor-pointer dark:bg-white">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="block dark:hidden">
+        <path
+          d="M6.993 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007S14.761 6.993 12 6.993 6.993 9.239 6.993 12zM12 8.993c1.658 0 3.007 1.349 3.007 3.007S13.658 15.007 12 15.007 8.993 13.658 8.993 12 10.342 8.993 12 8.993zM10.998 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2h-3zm17 0h3v2h-3zM4.219 18.363l2.12-2.122 1.415 1.414-2.12 2.122zM16.24 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.342 7.759 4.22 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z">
+        </path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="hidden dark:block">
+        <path
+          d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z">
+        </path>
+      </svg>
+      <span class="sr-only">Toggle Dark Mode</span>
+    </button>
+    <div
+      class="w-[95vw] sm:w-[85vw] lg:w-[70vw] flex flex-col justify-center items-start gap-5 bg-white dark:bg-blue-900 rounded shadow border border-white dark:border-blue-900 p-4">
+      <h1 class="text-5xl font-bold">To-Do List</h1>
+      <div class="flex flex-col justify-center items-start gap-2 w-full">
+        <label class="flex justify-center items-start md:items-center flex-col md:flex-row gap-2">
+          <span class="w-fit md:w-[5rem]">Judul</span>
+          <input id="todo-input-title" type="text" name="judul"
+            class="w-[45vw] sm:w-[25vw] lg:w-[10vw] rounded-md border border-gray-300 px-3 py-2 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+        </label>
+        <label class="flex justify-center items-start md:items-center flex-col md:flex-row gap-2">
+          <span class="w-fit md:w-[5rem]">Deskripsi</span>
+          <textarea
+            class="w-[65vw] md:w-[55vw] lg:w-[35vw] max-w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            id="todo-input-desc"></textarea>
+        </label>
+        <button onclick="addTodo()"
+          class="py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 cursor-pointer">Tambah</button>
+      </div>
+    </div>
+    <div id="todo-container"
+      class="w-[95vw] sm:w-[85vw] lg:w-[70vw] flex flex-col justify-center items-start gap-5 bg-white dark:bg-blue-900 rounded shadow border border-white dark:border-blue-900 p-4">
+      <select name="filter" id="todo-filter"
+        class="py-2 px-3 border border-gray-300  rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 cursor-pointer"
+        onchange="filterTodo()">
+        <option value="all" class="!text-black dark:text-white">Semua Tugas</option>
+        <option value="completed" class="!text-black dark:text-white">Tugas Yang Sudah Selesai
+        </option>
+        <option value="uncompleted" class="!text-black dark:text-white">Tugas Yang Belum Selesai
+        </option>
+      </select>
+      <h1 id="todo-empty" class="text-center w-full hidden"></h1>
+      <template id="todo-template">
+        <div class="flex flex-col justify-center items-start gap-2 w-full border border-gray-300 rounded p-3 todo-item">
+          <h6 id="todo-title" class="w-full font-semibold text-lg"></h6>
+          <p id="todo-desc" class="w-full text-gray-600 dark:text-gray-200"></p>
+          <div class="flex justify-end gap-2">
+            <button id="complete-btn"
+              class="py-1 px-2 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-700 cursor-pointer">Completed</button>
+            <button id="edit-btn"
+              class="py-1 px-2 bg-yellow-500 text-white font-semibold rounded-md shadow-md hover:bg-yellow-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Edit</button>
+            <button id="delete-btn"
+              class="py-1 px-2 bg-red-500 text-white font-semibold rounded-md shadow-md hover:bg-red-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Delete</button>
+          </div>
+        </div>
+      </template>
+      <div id="todo-list" class="w-full flex flex-col gap-3">
+
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
