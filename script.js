@@ -164,6 +164,7 @@ function filterTodo() {
     loadTodos();
   } else if (filter === "completed") {
     todoEmpty.classList.add("hidden");
+    loadTodos();
     todos = todos.filter(todo => todo.completed);
     if (todos.length === 0) {
       todoEmpty.classList.remove("hidden");
@@ -172,6 +173,7 @@ function filterTodo() {
     renderTodos();
   } else if (filter === "uncompleted") {
     todoEmpty.classList.add("hidden");
+    loadTodos();
     todos = todos.filter(todo => !todo.completed);
     if (todos.length === 0) {
       todoEmpty.classList.remove("hidden");
